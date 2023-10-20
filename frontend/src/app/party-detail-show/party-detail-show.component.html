@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="block row justify-content-center">
+    <div class="col-md-2 text-center">
+      <button class="btn btn-primary btn-sm" (click)="submit()">Creat Events</button>
+    </div>
+    <div class="col-12 container">
+<div class="row align-items-center flex-column-reverse">
+  <!-- <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner> -->
+  <div *ngIf="users" class="col-md-7">
+    <div class="card my-4 p-3  border shadow" *ngFor="let user of users">
+      <div class="title">{{user.Name | titlecase}} | {{user.Place| titlecase}}</div>
+      <div class="lh-base"> {{user.StartDate | date: 'dd-MM-yyyy'}} | {{user.StartTime}}</div>
+      <div class="button">
+        <div><button type="button"  id="First" class="btn btn-primary btn-sm" (click)="openPopup(user.Id,user.Name)">Creat Link</button></div>
+        <div><button id="Secound" class="btn btn-primary btn-sm" (click)="add(user.Id,user.Name)">Add Participant</button></div>
+        <div><button id="third" class="btn btn-primary btn-sm" (click)="Rating(user.Id,user.Name)"> View Rating</button></div>
+        <!-- <mat-icon (click)="openPopup(user.Id,user.Name)">share</mat-icon>
+        <mat-icon (click)="add(user.Id,user.Name)">person_add</mat-icon>
+        <mat-icon (click)="Rating(user.Id,user.Name)">poll</mat-icon>
+       <mat-icon class="text-danger" (click)="Delete(user.Id)">delete_forever</mat-icon> -->
+        <button type="button" id="First" class="btn btn-danger btn-sm" (click)="Delete(user.Id)" >Delete</button>
+        <!-- <button type="button" id="First" class="btn btn-danger btn-sm" (click)="Edit(user.Id)" >Edit</button> -->
+      </div>
+    </div>
+  </div>
+  </div>
+          
+  </div>
+  </div>
+</div>
+
+
+<section class="display" [ngStyle]="{'display':displayStyle}">
+  <div class="block2">
+    <div class="linktitle"><h1>{{Title| titlecase}}</h1></div>
+    <div>
+      <span>{{linkExpiryMessage}}</span>
+      <span>Your link : </span><span ><a href={{link}}>{{link}}</a></span>
+      
+    </div>
+    <!-- <form #myForm="ngForm" (ngSubmit)="OnSubmit()">
+      <span class="form-group" id="inputbox">
+          <label>Select Active Hours</label>
+          <input type="number" class="form-control" id="party" [(ngModel)]="formData.Hour" name="something"  placeholder="Duration of rating">
+      </span> -->
+<div class="row justify-content-center">
+  <!-- <button id="admin" type="submit" class="btn btn-primary me-2">Submit</button> -->
+      <button id="admin" type="button" class="btn btn-outline-primary col-md-3 my-4" (click)="closePopup()">Close</button>
+</div>   
+
+  <!-- </form> -->
+  </div>
+</section>

@@ -1,0 +1,91 @@
+.container {
+  height: 35rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 7rem;
+  width: 100%;
+}
+
+.contain {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  height: 32rem;
+  border-radius: 13px;
+  width: 51%;
+  overflow: hidden;
+  padding: 3rem;
+  padding-top: 1rem;
+  border-top: 4px solid #362c59;
+}
+
+.star {
+  color: #362c59;
+  font-size: 2.2rem;
+  font-weight: bolder;
+  float: right;
+}
+
+.pstar {
+  margin-bottom: 0.5rem;
+}
+
+.font {
+  font-size: 1.9rem;
+}
+
+#admin {
+  position: fixed;
+  top: 0.4rem;
+  right: 2rem;
+  width: 10%;
+}
+
+#submit_button {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-top: 3rem;
+  width: 7rem;
+}
+
+@media (rientation: landscape){
+  .contain{
+    margin-top: 4rem;
+width: 100%;
+  }
+  .contain{
+    width: 65%;
+height: 74vh;
+  }
+}
+
+@media (max-width:480px) {
+  .star {
+    margin-right: 1rem;
+  }
+
+  #admin {
+    width: 4rem;
+  }
+
+  #submit_button {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 3rem;
+  }
+
+  .contain {
+    box-shadow: none;
+    width: 100%;
+    overflow: none;
+    padding-left: none;
+    padding-top: none;
+    border-top: none;
+  }
+
+  .form{
+   margin-right: 1rem;
+  }
+}

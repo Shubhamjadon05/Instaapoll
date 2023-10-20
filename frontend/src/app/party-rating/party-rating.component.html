@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="contain">
+        <form #myForm="ngForm" (ngSubmit)="Onsubmit()" class="form">
+            <div *ngFor="let people of person; let i =index;" class="pstar">
+                <span class="font">{{people.name | titlecase}}</span>
+                <ngb-rating class="star" [max]="5" [(ngModel)]="people.value" name="something" ></ngb-rating>
+            </div>
+            <button class="btn btn-primary" id="submit_button">Submit</button>
+            <button type="submit" class="btn btn-primary" (click)="NextPage()" id="admin">login</button>
+        </form>
+    </div>
+</div>
+
+

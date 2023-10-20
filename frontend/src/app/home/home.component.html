@@ -1,0 +1,45 @@
+<div class="row justify-content-center my-4 col-11">
+  <div class="border shadow col-md-3 p-3">
+    <div class="">
+      <div class="errorHeading" *ngIf="displayheading">
+        <h3>* Invalid password and email</h3>
+      </div>
+      <form #myform="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email</label>
+          <input type="email" name="email" id="email"  required minlength="5"  maxlength="25" email
+            #name="ngModel" class="form-control"  [(ngModel)]="formData.email"
+            aria-describedby="emailHelp" placeholder="Enter Email">
+          <span class="error" *ngIf="name.invalid && name.touched">Invalid email</span>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" id="password" name="password" class="form-control" minlength="5" maxlength="15"
+             required #password="ngModel" 
+            [(ngModel)]="formData.password" placeholder="Enter Password">
+          <span class="error" *ngIf="password.invalid&&password.touched">invalid password </span>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="myform.invalid" id="button">Submit</button>
+      </form>
+    </div>
+
+    <!-- 
+        <div class="d-flex justify-content-center my-4"><span>Or login with</span></div>
+        <div class="d-flex justify-content-center"><img src="../../assets/177204_google_icon.png"></div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+
+
+
+    <!-- <p>Data received in LoginComponent: {{ receivedData }}</p> -->
+
+  </div>
+</div>
+
+<section class="display" [ngStyle]="{'display':displayStyle}">
+  <div class="block2">
+    <mat-progress-spinner *ngIf="isLoading" class="loading" mode="indeterminate"></mat-progress-spinner>
+  </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="card col-10 col-md-6 my-4 p-1">
+        <h1 class="text-center my-1">{{title | titlecase}}</h1>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary col-6 col-md-3 my-3" (click)="AddQuestion()">View Question</button>
+        </div>
+        <div class="my-4 mx-2">
+            <div class="form-inline">
+                <form #myForm="ngForm" (ngSubmit)="OnSubmit()" class="form-inline">
+                    <div class="d-flex">
+                        <div class="form-group mb-2 col-md-6">
+                            <input type="text" class="form-control col-md-6" id="name" [(ngModel)]="formData.Name"
+                                 name="something" required
+                                placeholder="Particiapant Full Name">
+                        </div>
+                        <button type="submit" class="btn btn-primary mx-1 mb-2" [disabled]="myForm.invalid"
+                            id="button">Add</button>
+                    </div>
+                    <div *ngIf="Boolean"><span class="text-danger">*Error invalid name</span></div>
+                </form>
+            </div>
+            <div class="my-2">
+                <div class="mx-2 overflow-auto" *ngFor="let person of people">
+                    <li>
+                        <span class="fs-5 font-weight-light">{{person.Name}}</span>
+                        <span class=" d-inline col-3 col-md-3">
+                                <mat-icon class=" p-3 text-right text-danger" (click)="delete(person.Id)">
+                                    delete
+                                </mat-icon>
+                        </span>
+                    </li>
+                    <!-- <li>{{person.Name}} <a><mat-icon class="fa-2x">delete</mat-icon></a></li> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="display" [ngStyle]="{'display':displayStyle}">
+    <div class="block2">
+        <div class="linktitle row justify-content-center">
+            <h1 class="text-center my-3">{{title| titlecase}}</h1>
+        </div>
+        <div>
+            <span>{{linkExpiryMessage}}</span>
+            <span *ngIf="LinkBoolean">Your link : </span><span ><a href={{link}}>{{link}}</a></span>
+        </div>
+        <div class="row justify-content-center">
+            <button id="admin" type="button" class="btn btn-outline-primary col-md-4 my-4"
+                (click)="closePopup()">Close</button>
+        </div>
+    </div>
+</section>

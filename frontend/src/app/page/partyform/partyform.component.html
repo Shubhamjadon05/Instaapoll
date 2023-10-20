@@ -1,0 +1,47 @@
+<div class="my-4 row justify-content-center">
+    <div class="col-md-5 border shadow rounded border-4 border-pink col-11">
+        <div class="text-danger" *ngIf="displayheading">
+            <h3 class="text-center">Invalid Entery</h3>
+        </div>
+        <form #myForm="ngForm" (ngSubmit)="OnSubmit()" class="fs-6 p-3">
+            <div class=" row">
+                <div class="row justify-content-center"><h2 class="col-md-12 text-center">Enter Event Detail</h2> </div>
+                <div class="form-group p-1 mx-2 col-md-5 ">
+                    <label for="name" class="fs-6">Event Title</label>
+                    <input type="Name" class="form-control" id="tittle" [(ngModel)]="formData.Name" name="something"
+                        placeholder="Enter Event Title">
+                </div>
+                <div class="form-group p-1 mx-2 col-md-5 ">
+                    <label for="Place" class="fs-6">Place</label>
+                    <input type="place" class="form-control" id="place" [(ngModel)]="formData.Place" name="something"
+                        placeholder="Enter Place">
+                </div>
+                <div class="form-group p-1 mx-2 col-md-5">
+                    <label for="Place" class="fs-6">Date</label>
+                    <input type="date" class="form-control" id="date" [(ngModel)]="formData.Date" name="something"
+                        placeholder="Enter Event Date">
+                </div>
+                <div class="form-group p-1 mx-2 col-md-5">
+                    <label for="Time" class="fs-6">Time</label>
+                    <input type="time" class="form-control" id="time" [(ngModel)]="formData.Time" name="something"
+                        placeholder="Enter Event Time">
+                </div>
+                <div class="form-group p-1 mx-2 col-md-7">
+                    <label for="Hour" class="fs-6">Select an active event time(In Hour) </label>
+                    <input type="hour" class="form-control" id="hour" [(ngModel)]="formData.Hour"  name="something"
+                    >
+                    <div class="form-text">Event will close once input time has passed.</div>
+                </div>
+                <div class="form-group p-1 mx-2 col-md-11">
+                    <label for="message" class="fs-6">Event Description</label>
+                    <textarea class="form-control" id="description" type="descriptions" [(ngModel)]="formData.Description" name="something"
+                        rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-center col-md-10">
+                <button type="submit" class="btn btn-primary mx-2 my-2 col-md-3 col-3" [disabled]="myForm.invalid">Submit</button>
+                <button class="btn btn-primary mx-2 my-2 col-md-3 col-3" (click)="back()">Back</button>
+            </div>
+        </form>
+    </div>
+</div>
