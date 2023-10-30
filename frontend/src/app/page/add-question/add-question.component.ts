@@ -3,18 +3,48 @@ import { HomeNavDataservicesService } from 'src/app/new/home-nav-dataservices.se
 import { QuestionServiceService } from 'src/app/new/question-service.service';
 import { Router } from '@angular/router';
 
+declare var webkitSpeechRecognition: any;
+
+
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
+  recognition: any;
+  activeField: any
+  nameValue: any;
+  emailValue: any;
+  questionValue: any
   constructor(private homeNavDataServices: HomeNavDataservicesService,
     private questionService: QuestionServiceService,
-    private router:Router) { }
+    private router:Router) {
+      
+      this.recognition = new webkitSpeechRecognition();
+    
+      this.recognition.onresult = (event: any) => {
+        const spokenText = event.results[0][0].transcript;
+        if (this.activeField === 'question') {
+          this.questionValue = spokenText;
+          this.formData.question = this.questionValue;
+        }
+        
+        
+       
+      }
+  
+
+
+
+
+     }
   Boolean: boolean = false;
   title: any
   question: any
+  
+  submit:any
+  voiceInput:any;
 
   // for getting Question from frontpage
   formData = {
@@ -42,6 +72,11 @@ export class AddQuestionComponent implements OnInit {
     this.title = localStorage.getItem('ParticipantName')
     this.load_data()
   }
+  startListening(field: string) {
+    this.activeField = field;
+    this.recognition.start();
+  }
+  
 
   // for submit of question
   OnSubmit() {
@@ -69,24 +104,7 @@ this.questionService.deleteQuestion({question_id:Id}).subscribe((reponse:any)=>{
 })
   }
 
-  // CreatLink() {
-  //   // this.displayStyle="block";
-  //   let Id = localStorage.getItem("Id")
-  //   this.ValidateLink(Id);
-  // }
-
-  // ValidateLink(Id: any) {
-  //   this.ValidateLinkService.validate({ event_id: Id }).subscribe((response: any) => {
-  //     console.log()
-  //     if (response.Boolean == 1) {
-  //       this.link = this.baseURL + 'eventrating/' + Id
-  //       this.LinkBoolean = true
-  //     }
-  //     else {
-  //       this.linkExpiryMessage = "Link is expired"
-  //     }
-  //   })
-  // }
+ 
 
 
 }

@@ -7,11 +7,21 @@ import { HomeNavDataservicesService } from 'src/app/new/home-nav-dataservices.se
 import AlanButton from '@alan-ai/alan-sdk-web';
 import { CommunicationService } from 'src/app/communication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+declare var webkitSpeechRecognition: any;
+
 
 
 
 
 declare var window: any; // Declare 'window' to access browser APIs
+
+
+const voiceCommand = "Submit";
+const form = document.getElementById('yourFormId');
+const submit = document.getElementById('submit');
+if (submit) {
+  submit.click();
+}
 
 @Component({
   selector: 'app-ragister',
@@ -22,25 +32,31 @@ export class RagisterComponent implements OnInit {
   @ViewChild('myform') myform: ElementRef | any;
   submitForm() {
     // this.myform.nativeElement.submit();
-    if (this.myform) {
+    if (this.myform)
+     {
       this.myform.onSubmit(null);
+      
+     
     }
+    
   }
   
-
+ 
 
   
   data: any
-  spokenWord: any
-  sharedDataService: any
   
-  
-  
-
-  receivedData: any
   alanBtnInstance: any
   emailValue: any
   passwordValue: any
+  nameValue:any
+  conformPasswordValue:any
+  submitValue:any
+  
+  recognition: any;
+  activeField: any
+  submit:any
+  voiceInput:any;
   
 
   // to get login-form data
@@ -49,6 +65,7 @@ export class RagisterComponent implements OnInit {
     email: "",
     password: "",
     conformPassword: ""
+    
   }
 
   // displayheading=false
@@ -68,6 +85,7 @@ export class RagisterComponent implements OnInit {
 
 
   }
+  
 
 
   constructor(private route: Router, private ragisterservice: RagisterserviceService, private homeNavDataService: HomeNavDataservicesService,
@@ -77,19 +95,58 @@ export class RagisterComponent implements OnInit {
     private elementRef: ElementRef,
    
   ) { 
-    communicationService.setLoginFunction(this.setValuesForLogin.bind(this));
-    communicationService.setSubmitFuntion(this.submitFunction.bind(this));
-  }
-
-  // loginFunction(data: any) {
-  //   this.setValuesForLogin(data);
+    this.recognition = new webkitSpeechRecognition();
     
-  // }
+    
+    this.recognition.onresult = (event: any) => {
+      const spokenText = event.results[0][0].transcript;
+      if (this.activeField === 'name') {
+        this.nameValue = spokenText;
+        this.formData.name = this.nameValue;
+      }
+      
+      
+      else if (this.activeField === 'email') {
+        this.emailValue = spokenText;
+        this.formData.email = this.emailValue;
+      }
 
-  submitFunction(data: any) {
-    this.submitForm()
-    console.log("Form is being submitted")
+      else if (this.activeField === 'password') {
+        this.passwordValue = spokenText;
+        this.formData.password = this.passwordValue;
+      }
+      else if (this.activeField === 'confirmpassword') {
+        this.conformPasswordValue = spokenText;
+        this.formData.conformPassword = this.conformPasswordValue;
+      }
+      else if (spokenText === voiceCommand.toLowerCase()) {
+        this.submitForm();
+      }
+      else if (this.voiceInput.toLowerCase() === 'navigate to about') {
+        this.navigateToPage('/events');
+      }
+
+      
+    }
+    }
+  navigateToPage(arg0: string) {
+    throw new Error('Method not implemented.');
   }
+  
+
+  startListening(field: string) {
+    this.activeField = field;
+    this.recognition.start();
+  }
+  
+
+
+  
+
+  // submitFunction(data: any) {
+  //   this.submitForm()
+  //   console.log("Form is being submitted")
+  // }
 
   onSubmit() {
     // console.log(this.formData)
@@ -113,21 +170,9 @@ export class RagisterComponent implements OnInit {
   }
 
   
-  setValuesForLogin(loginData: any) {
-    console.log("loginData", loginData);
-    const element = this.elementRef.nativeElement.querySelector("#" + loginData.type);
-    if (element) {
-      console.log('Element found with ID: ' + loginData.type);
-      if (!element.value) {
-        element.value = loginData.value;
 
-      }
-    } else {
-      console.log('Element not found with ID: ' + loginData.type);
-      console.log('password  id not found' + loginData.type)
-
-
-    }
-    
-  }
 }
+function recognizeVoiceCommand(voiceInput: any, string: any) {
+  throw new Error('Function not implemented.');
+}
+

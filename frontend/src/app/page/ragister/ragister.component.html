@@ -12,22 +12,36 @@
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="text" #name="ngModel" class="form-control"
                         [(ngModel)]="formData.name" required aria-describedby="nameHelp" placeholder="Enter Full Name">
+                        <button type="name" (click)="startListening('name')" class="btn btn-outline-secondary"><i class="fa fa-microphone"></i></button>
+                        
                 </div>
+                
+
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" id="email" #name="ngModel" class="form-control" 
                         [(ngModel)]="formData.email" required aria-describedby="emailHelp" placeholder="Enter Email">
                 </div>
+                <div>
+                    <button type="button" (click)="startListening('email')" class="btn btn-outline-secondary"><i class="fa fa-microphone"></i></button>
+                  </div>
+                  
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name="password" class="form-control" #password="ngModel"
                         id="password" required [(ngModel)]="formData.password" placeholder="Enter Password">
                 </div>
+                <div>
+                    <button type="password" (click)="startListening('password')" class="btn btn-outline-secondary"><i class="fa fa-microphone"></i></button>
+                  </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Confirm Password</label>
                     <input type="password" name="Conformpassword" class="form-control" id="conformPassword"
                     [(ngModel)]="formData.conformPassword" required  placeholder="Enter Confirm Password">
                 </div>
+                <div>
+                    <button type="passsword" (click)="startListening('confirmpassword')" class="btn btn-outline-secondary"><i class="fa fa-microphone"></i></button>
+                  </div>
                 <div class="row justify-content-center">
                     <button type="submit" class="btn btn-primary col-md-3"  [disabled]="myform.invalid"  id="button">Submit</button>
                 </div>

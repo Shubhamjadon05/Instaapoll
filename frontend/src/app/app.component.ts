@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 // import { SharedDataService } from './shared-data.service';
 import { CommunicationService } from './communication.service';
 
-
+declare var webkitSpeechRecognition: any;
 
 @Component({
   selector: 'app-root',
@@ -14,16 +14,33 @@ import { CommunicationService } from './communication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  spokenTextInput: any;
+  // spokenTextInput: any;
   spokenWord :any
   inputData: string = 'Data from App Component';
   loginData : any;
+  recognition: any;
+  userSpeech: string = '';
   
 
-  constructor(private el: ElementRef, private router: Router,private communicationService: CommunicationService) {}
+  
+  
+
+  constructor(private el: ElementRef, private router: Router,private communicationService: CommunicationService) {
+
+    this.recognition = new webkitSpeechRecognition();
+    this.recognition.onresult = (event: any) => {
+      this.userSpeech = event.results[0][0].transcript;
+    };
+    // this.loginData = { type: '', value: '' };
+  }
+  startListening() {
+    this.recognition.start();
+  }
   
 
   setDataForLoginComponent(speach:any) {
+    console.log(speach,"speach in panel")
+    // console.log(this.spokenTextInput,"is this spoken text in panel")
    
 
     this.communicationService.callLoginFunction(speach);
@@ -32,25 +49,32 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
+
+
+
+
+
+
     const alanKey = '97c1597b76913fc5d3d1ea5d5e5403772e956eca572e1d8b807a3e2338fdd0dc/stage';
     
-let spokenTextInput:string = ''
+// let spokenTextInput:string = ''
 let alanBtnElement = ''
 let spokenWord =''
+
+
 
 // Define Alan AI options
     const alanOptions = {
       key: alanKey,
       onCommand: (commandData: any) => {
        
+        console.log(commandData,"command data from app in penel")
         if (commandData.command === 'submit') {
         
           // this.communicationService.submitForm();
            this.communicationService.callSubmitFuntion("default");
 
         }
-        
-
 
         if(commandData.command === 'email'){
           // console.log("email command running....")
@@ -96,19 +120,9 @@ let spokenWord =''
         }
 
 
-
-
-
-        
-        
-
-
-
-
-
         // this this route page from voice commands 
         if (commandData.command === 'login ') {
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/**']);
                   } else if (commandData.command === 'register') {
                     this.router.navigate(['/register']);
                   } else if (commandData.command === 'view-rating') {
@@ -128,16 +142,18 @@ let spokenWord =''
                   else if (commandData.command==='enter email'){
                     this.router.navigate(['/Enter Email'])
                   }
+  },
 
 
-        
-      },
+
+      
       onEvent:(e:any) => {
        
-        // console.log(e,"an event on ai");
+        // // console.log(e,"an event on ai");
         if(!e.type){
 
           if(this.loginData && this.loginData.type){
+            console.log(this.loginData,"from app login data")
 
             this.loginData.value = e.text
             this.setDataForLoginComponent(this.loginData);   
@@ -145,15 +161,34 @@ let spokenWord =''
     
         }
         }
-        
-    }
+
+
+
+      // onEvent: (e: any) => {
+      //   if (!e.type) {
+      //     if (this.loginData&& this.loginData.type) {
+      //       if (this.loginData.value) {
+      //         this.loginData.value += ' ' + e.text; 
+      //       } else {
+      //         this.loginData.value = e.text;
+      //       }
+      //       this.setDataForLoginComponent(this.loginData);
+      //     }
+      //   }
+      // }
       
-      
-    
-    
     
 
+    }
+      
+  
     alanBtn(alanOptions);
+    console.log(alanOptions,"alan option  ffrom app ")
+
+    
+    // startListening(); {
+    //   this.recognition.start();
+    // }
 
     
 
@@ -162,4 +197,8 @@ let spokenWord =''
 
 
 
+
+function startListening() {
+  throw new Error('Function not implemented.');
+}
 

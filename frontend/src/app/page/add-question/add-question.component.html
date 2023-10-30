@@ -14,9 +14,11 @@
                                 <div class="mb-3">
                                     <!-- <label for="exampleFormControlTextarea1" class="form-label">Enter Question</label> -->
                                     <textarea class="form-control" [(ngModel)]="formData.question" minlength="1"
-                                        maxlength="100" name="something" required id="exampleFormControlTextarea1"
+                                        maxlength="100" name="question" required id="exampleFormControlTextarea1"
                                         rows="1" placeholder="Enter question"></textarea>
+                                        
                                 </div>
+                                <button (click)="startListening('question')"> <i class="fa fa-microphone"></i></button>
                             </div>
                             <div class="mx-1 mb-2 h-25">
                                 <button type="submit" class="btn btn-primary mx-1 mb-2" [disabled]="myForm.invalid"

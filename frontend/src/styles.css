@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~font-awesome/css/font-awesome.css";
+
 .btn-primary {
   background-color: #94B8D6; /* Background color */
   border-color: #94B8D6; /* Border color */
@@ -7,10 +9,11 @@
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #6d7973; /* Background color on hover/focus */
+  background-color: #6d796f; /* Background color on hover/focus */
   border-color: #94B8D6; /* Border color on hover/focus */
   color: #fff; /* Text color on hover/focus */
 }
+
 
 
 

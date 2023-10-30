@@ -37,3 +37,9 @@ justify-content: center;
         width: 80%;
     }
 } */
+
+.microphone-icon {
+    cursor: pointer; /* Make it look clickable */
+    display: none;   /* Initially hidden */
+  }
+  

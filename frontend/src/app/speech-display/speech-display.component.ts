@@ -10,19 +10,19 @@ export class SpeechDisplayComponent implements OnInit {
   spokenText: string = '';
 
   ngOnInit(): void {
-    const alanKey = 'e10972f385abc3c1794986211386e7e12e956eca572e1d8b807a3e2338fdd0dc/stage';
+    // const alanKey = '97c1597b76913fc5d3d1ea5d5e5403772e956eca572e1d8b807a3e2338fdd0dc/stage';
 
-    AlanButton({
-      key: alanKey,
-      onCommand: (commandData: any) => {
-        // Handle Alan's commands here
-        console.log(commandData);
+    // AlanButton({
+    //   key: alanKey,
+    //   onCommand: (commandData: any) => {
+    //     // Handle Alan's commands here
+    //     console.log(commandData,"speech");
 
-        // Check if Alan sends auto-typed speech
-        if (commandData.command === 'autoTypedSpeech') {
-          this.spokenText = commandData.text; // Update the spokenText property
-        }
-      },
-    });
+    //     // Check if Alan sends auto-typed speech
+    //     if (commandData.command === 'autoTypedSpeech') {
+    //       this.spokenText = commandData.text; // Update the spokenText property
+    //     }
+    //   },
+    // });
   }
 }

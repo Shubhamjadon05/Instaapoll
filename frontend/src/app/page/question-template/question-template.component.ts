@@ -18,7 +18,7 @@ export class QuestionTemplateComponent implements OnInit {
   TemplateQuestion1: any
   TemplateQuestion2: any
   TemplateQuestion3: any
-  // TemplateQuestion4:any
+  TemplateQuestion4:any
 
   formData = {
     template_id: ""

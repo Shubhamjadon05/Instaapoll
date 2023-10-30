@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import alanBtn from '@alan-ai/alan-sdk-web';
 import { CommunicationService } from '../communication.service';
+declare var webkitSpeechRecognition: any;
 
 
 
@@ -28,6 +29,7 @@ export class HomeComponent {
   alanBtnInstance: any
   emailValue:any
   passwordValue: any
+  
 
 
 
@@ -40,6 +42,8 @@ export class HomeComponent {
   // displayheading=false
   displayheading: boolean = false;
   displayStyle = "none";
+  recognition: any;
+  activeField: any
 
   constructor(private http: HttpClient,
     private loginService: LoginServiceService,
@@ -53,26 +57,44 @@ export class HomeComponent {
 
 
   ) {
-    communicationService.setLoginFunction(this.loginFunction.bind(this));
-
-  }
-
-  loginFunction(data: any) {
-    this.setValuesForLogin(data);
+    // communicationService.setLoginFunction(this.loginFunction.bind(this));
     
+    this.recognition = new webkitSpeechRecognition();
+    this.recognition.onresult = (event: any) => {
+      const spokenText = event.results[0][0].transcript;
+      if (this.activeField === 'email') {
+        this.emailValue = spokenText;
+        this.formData.email = this.emailValue;
+      } else if (this.activeField === 'password') {
+        this.passwordValue = spokenText;
+        this.formData.password = this.passwordValue;
+      }
+
+  }}
+  startListening(field: string) {
+    this.activeField = field;
+    this.recognition.start();
   }
+  
+ 
+
+
+  // loginFunction(data: any) {
+  //   this.setValuesForLogin(data);
+    
+  // }
+  
   onSubmit() {
     this.isLoading = true;
     this.displayStyle = "block";
-    // console.log(this.formData)
+    
     const payload = this.formData;
     // localStorage.setItem('check', this.data.Boolean);
     this.loginService.postData(payload).subscribe((response: any) => {
       this.data = response
       this.sessionservice.postData(response.user.Id)
-      // this.isLoading=false
-      // console.log(response.user.Name,"this is data response in login")
-      // console.log(response)
+      
+      
       setTimeout(() => {
         if (response.Boolean == 1) {
           this.isLoading = false
@@ -101,14 +123,6 @@ export class HomeComponent {
 
   ngOnInit(): void {
 
-
-
-
-
-    
-
-    // console.log('subject emit')
-    // localStorage.removeItem('check');
     this.homeNavDataService.AddNav.next(true);
     this.homeNavDataService.AddDashboard.next(false);
 
@@ -118,24 +132,24 @@ export class HomeComponent {
   
   
   
-  setValuesForLogin(loginData: any) {
-    console.log("loginData", loginData);
-    const element = this.elementRef.nativeElement.querySelector("#"+loginData.type);
+  // setValuesForLogin(loginData: any) {
+  //   console.log("loginData", loginData);
+  //   const element = this.elementRef.nativeElement.querySelector("#"+loginData.type);
   
 
-    if (element) {
-      console.log('Element found with ID: ' + loginData.type);
-      if(!element.value){
-        element.value = loginData.value;
+  //   if (element) {
+  //     console.log('Element found with ID: ' + loginData.type);
+  //     if(!element.value){
+  //       element.value = loginData.value;
 
-      }
-    } else {
-      console.log('Element not found with ID: ' + loginData.type);
-      console.log('password  id not found' + loginData.type)
+  //     }
+  //   } else {
+  //     console.log('Element not found with ID: ' + loginData.type);
+  //     console.log('password  id not found' + loginData.type)
      
       
-    }
-  }
+  //   }
+  // }
 }
 
 
@@ -145,4 +159,8 @@ export class HomeComponent {
 
 
 
+
+function loginFunction(data: any, any: any) {
+  throw new Error('Function not implemented.');
+}
 

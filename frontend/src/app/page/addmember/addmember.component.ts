@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+declare var webkitSpeechRecognition: any;
 
 @Component({
   selector: 'app-addmember',
@@ -35,6 +36,10 @@ export class AddmemberComponent implements OnInit {
   
 
   selectedOption: any;
+  recognition: any;
+  activeField: any
+  questionValue: any;
+  NameValue: any
   constructor(
     private route: Router,
     private http: HttpClient,
@@ -45,37 +50,27 @@ export class AddmemberComponent implements OnInit {
     private ParticipantDeleteService:ParticipantDeleteServicService,
     private ValidateLinkService:ValidLinkServiceService,
     // private questionservice:QuestionServiceService
-  ) {}
+  ) {
 
-// getQuestion(){
-//   this.questionservice.getquestion({event_id:0}).subscribe((response:any)=>{
-//     console.log(response)
+     
+    this.recognition = new webkitSpeechRecognition();
     
-//   })
-// }
-//  to convert the input test into right format
-// InputConverter(){
-//   const name = this.formData.Name;
-//   const words = name.split(' ');
-//   console.log(words,"this is word to convert")
+    this.recognition.onresult = (event: any) => {
+      const spokenText = event.results[0][0].transcript;
+      if (this.activeField === 'Name') {
+        this.NameValue = spokenText;
+        this.formData.Name = this.NameValue;
+      }
+      
+      
+     
+    }
+  }
 
-//   const capitalizedWords = words.map((word) => {
-//     console.log(capitalizedWords,"this is capitalized word")
- 
-//     const preservedWords = ['Dr.', 'Mr.', 'Ms.'];
-
-//     if (preservedWords.includes(word)) {
-//       this.formData.Name=word
-//       console.log(this.formData.Name, "this is name in formdata")
-//       return this.formData.Name;
-//     } else {
-//       word=word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-//       console.log(word)
-//       this.formData.Name=word
-//       return this.formData.Name
-//     }
-//   });
-// }
+  startListening(field: string) {
+    this.activeField = field;
+    this.recognition.start();
+  }
 
 
   OnSubmit() {
