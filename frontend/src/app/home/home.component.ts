@@ -27,10 +27,8 @@ export class HomeComponent {
   communicationService: any
   receivedData: any
   alanBtnInstance: any
-  emailValue:any
+  emailValue: any
   passwordValue: any
-  
-
 
 
 
@@ -50,15 +48,15 @@ export class HomeComponent {
     private router: Router,
     private sessionservice: SessionStorageService,
     private homeNavDataService: HomeNavDataservicesService,
-    
+
     formBuilder: FormBuilder,
     communicationService: CommunicationService,
     private elementRef: ElementRef
 
 
   ) {
-    // communicationService.setLoginFunction(this.loginFunction.bind(this));
-    
+
+
     this.recognition = new webkitSpeechRecognition();
     this.recognition.onresult = (event: any) => {
       const spokenText = event.results[0][0].transcript;
@@ -70,31 +68,26 @@ export class HomeComponent {
         this.formData.password = this.passwordValue;
       }
 
-  }}
+    }
+  }
   startListening(field: string) {
     this.activeField = field;
     this.recognition.start();
   }
-  
- 
 
 
-  // loginFunction(data: any) {
-  //   this.setValuesForLogin(data);
-    
-  // }
-  
+
   onSubmit() {
     this.isLoading = true;
     this.displayStyle = "block";
-    
+
     const payload = this.formData;
     // localStorage.setItem('check', this.data.Boolean);
     this.loginService.postData(payload).subscribe((response: any) => {
       this.data = response
       this.sessionservice.postData(response.user.Id)
-      
-      
+
+
       setTimeout(() => {
         if (response.Boolean == 1) {
           this.isLoading = false
@@ -128,39 +121,5 @@ export class HomeComponent {
 
 
   }
-
-  
-  
-  
-  // setValuesForLogin(loginData: any) {
-  //   console.log("loginData", loginData);
-  //   const element = this.elementRef.nativeElement.querySelector("#"+loginData.type);
-  
-
-  //   if (element) {
-  //     console.log('Element found with ID: ' + loginData.type);
-  //     if(!element.value){
-  //       element.value = loginData.value;
-
-  //     }
-  //   } else {
-  //     console.log('Element not found with ID: ' + loginData.type);
-  //     console.log('password  id not found' + loginData.type)
-     
-      
-  //   }
-  // }
-}
-
-
-
-
-
-
-
-
-
-function loginFunction(data: any, any: any) {
-  throw new Error('Function not implemented.');
 }
 
