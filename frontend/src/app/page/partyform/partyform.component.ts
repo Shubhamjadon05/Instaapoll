@@ -58,7 +58,7 @@ export class PartyformComponent implements OnInit {
     Date: "",
     Time: "",
     Description: "",
-    Hour: 6
+    Hour: ""
   }
 
   constructor(private route: Router,
@@ -73,6 +73,34 @@ export class PartyformComponent implements OnInit {
 
   ) {
     this.recognition = new webkitSpeechRecognition();
+    this.recognition.addEventListener('end', () => {
+      // Code to run when recognition stops on its own
+      if (this.activeField === 'name') {
+        this.startListening('place');
+      } else if (this.activeField === 'place') {
+        this.startListening('date');
+      } else if (this.activeField==='date') {
+        this.startListening('time')
+      }
+      else if (this.activeField==='time') {
+        this.startListening('hour')
+        
+        
+      }
+      else if (this.activeField==='hour') {
+        this.startListening('Description')
+        this.recognition.stop();
+        
+      }
+      else{
+        this.recognition.stop();
+
+        // this.startListening('name')
+      }
+
+  
+    });
+    
     this.recognition.onresult = (event: any) => {
       const spokenText = event.results[0][0].transcript;
       if (this.activeField === 'name') {
@@ -101,35 +129,23 @@ export class PartyformComponent implements OnInit {
       else if (this.activeField === 'Description') {
         this.DescriptionValue = spokenText;
         this.formData.Description = this.DescriptionValue;
-      }
-
-      // else if (spokenText === voiceCommand.toLowerCase()) {
-      //   this.submitForm();
-      // }
-
-      
+      } 
     }
     console.log(this.activeField,"fields")
    
   }
+  isListening: boolean = false;
   
-  startListening(field: string) {
+  startListening = async (field: string)  =>{
     this.activeField = field;
-    console.log(this.activeField,"active fields")
-    this.recognition.start();
+    this.isListening = true; // Set the listening flag to true
+    // const startTime = Date.now();
+    await this.recognition.start();
+
+   
   }
   
   
-
- 
-
-
-  
-
-  // loginFunction(data: any) {
-  //   this.setValuesForLogin(data);
-
-  // }
 
   submitFunction(data: any) {
     this.submitForm()

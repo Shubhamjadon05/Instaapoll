@@ -1,5 +1,5 @@
 
-import { Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginServiceService } from '../services/login-service.service';
 import { SessionStorageService } from '../services/session-storage.service';
@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import alanBtn from '@alan-ai/alan-sdk-web';
 import { CommunicationService } from '../communication.service';
 declare var webkitSpeechRecognition: any;
+import { Directive, HostListener } from '@angular/core';
+
+
 
 
 
@@ -19,7 +22,10 @@ declare var webkitSpeechRecognition: any;
 
 
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  
+  
+
   isLoading: boolean = false;
   data: any
   spokenWord: any
@@ -30,6 +36,8 @@ export class HomeComponent {
   emailValue: any
   passwordValue: any
 
+
+  
 
 
   // to get login-form datas
@@ -42,6 +50,7 @@ export class HomeComponent {
   displayStyle = "none";
   recognition: any;
   activeField: any
+  myForm: any;
 
   constructor(private http: HttpClient,
     private loginService: LoginServiceService,
@@ -51,28 +60,65 @@ export class HomeComponent {
 
     formBuilder: FormBuilder,
     communicationService: CommunicationService,
-    private elementRef: ElementRef
-
-
+    private elementRef: ElementRef,
+    
   ) {
+    // hare i am doing some experment for switch from full fill input to next input field 
+    // start Here 
 
 
-    this.recognition = new webkitSpeechRecognition();
-    this.recognition.onresult = (event: any) => {
+    this.myForm = formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+
+
+    // End Here 
+
+
+      this.recognition = new webkitSpeechRecognition();
+      this.recognition.addEventListener('end', () => {
+      
+        if (this.activeField === 'email') {
+          this.startListening('password');
+        } 
+         
+         else {
+          this.recognition.stop();
+        }
+      });
+      this.recognition.onresult = (event: any) => {
+
       const spokenText = event.results[0][0].transcript;
+
       if (this.activeField === 'email') {
         this.emailValue = spokenText;
         this.formData.email = this.emailValue;
+
       } else if (this.activeField === 'password') {
         this.passwordValue = spokenText;
         this.formData.password = this.passwordValue;
+
       }
 
     }
   }
-  startListening(field: string) {
+ 
+ 
+  isListening: boolean = false;
+
+  // Helper method to simulate a click on a button
+ 
+
+
+   startListening = async (field: string)  =>{
     this.activeField = field;
-    this.recognition.start();
+    this.isListening = true; // Set the listening flag to true
+    // const startTime = Date.now();
+    await this.recognition.start();
+
+   
   }
 
 

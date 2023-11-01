@@ -37,6 +37,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ShowQuestionComponent,
     QuestionTemplateComponent,
     GoogleLoginComponent,
+    
     // SpeechDisplayComponent,
    
     // FormsModule should not be included here

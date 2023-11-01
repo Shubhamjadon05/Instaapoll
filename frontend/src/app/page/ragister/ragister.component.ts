@@ -96,6 +96,26 @@ export class RagisterComponent implements OnInit {
    
   ) { 
     this.recognition = new webkitSpeechRecognition();
+    this.recognition.addEventListener('end', () => {
+      
+      if (this.activeField === 'name') {
+        this.startListening('email');
+      } else if (this.activeField === 'email') {
+        this.startListening('password');
+        
+        // To stop fields are fullfill
+       } else if (this.activeField === 'password') {
+          this.startListening('confirmpassword');
+        
+          
+       }
+       
+       else {
+        // Default behavior when activeField is not recognized
+        // this.startListening('email');
+        this.recognition.stop();
+      }
+    });
     
     
     this.recognition.onresult = (event: any) => {
@@ -132,11 +152,16 @@ export class RagisterComponent implements OnInit {
   navigateToPage(arg0: string) {
     throw new Error('Method not implemented.');
   }
+  isListening: boolean = false;
   
 
-  startListening(field: string) {
+  startListening = async (field: string)  =>{
     this.activeField = field;
-    this.recognition.start();
+    this.isListening = true; // Set the listening flag to true
+    // const startTime = Date.now();
+    await this.recognition.start();
+
+   
   }
   
 

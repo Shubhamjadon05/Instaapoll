@@ -16,21 +16,18 @@ import { environment } from 'src/environments/environment';
 })
 export class PartyDetailShowComponent implements OnInit {
   users: any
-  baseURL: string=environment.sideUrl;
-  constructor(private router: Router, 
+  baseURL: string = environment.sideUrl;
+  constructor(private router: Router,
     private partydetailservice: PartydetailInserviceService,
-     private homeNavDataServices: HomeNavDataservicesService,
-      private eventlinkservive: EventlinkserviceService,
-       private creatlinkservice:CreatlinkserviceService,
-    private deleteservice:DeleteServiceService,
+    private homeNavDataServices: HomeNavDataservicesService,
+    private eventlinkservive: EventlinkserviceService,
+    private creatlinkservice: CreatlinkserviceService,
+    private deleteservice: DeleteServiceService,
     // private ValidateLinkService:ValidLinkServiceService,
-    private editService:EditServiceService
-    ) {
-    //     this.partydetailservice.users().subscribe((data:any)=>{
-    //       console.log(data, "this is data in party Detail ts file")
-    // this.users=data
-    //     })
-  
+    private editService: EditServiceService
+  ) {
+   
+
   }
   link: string = ''
 
@@ -47,17 +44,17 @@ export class PartyDetailShowComponent implements OnInit {
     localStorage.setItem("Id", data)
     localStorage.setItem("ParticipantName", Name)
   }
-  Delete(data:any){
-this.deleteservice.deleteData({event_id:data}).subscribe((Response:any)=>{
-  // console.log(Response)
-  this.loadData();
-})
+  Delete(data: any) {
+    this.deleteservice.deleteData({ event_id: data }).subscribe((Response: any) => {
+      // console.log(Response)
+      this.loadData();
+    })
   }
   ngOnInit(): void {
     isLoading:
     // console.log('subject emit')
     this.homeNavDataServices.AddDashboard.next(true);
-  this.loadData();
+    this.loadData();
     // if (localStorage.getItem('check')) {
     //   let val = localStorage.getItem('check');
     //   this.partydetailservice.postData({ user_id: val }).subscribe((response: any) => {
@@ -68,7 +65,7 @@ this.deleteservice.deleteData({event_id:data}).subscribe((Response:any)=>{
     //   this.router.navigate(['/login'])
     // }
   }
-  loadData(){
+  loadData() {
     if (localStorage.getItem('check')) {
       let val = localStorage.getItem('check');
       this.partydetailservice.postData({ user_id: val }).subscribe((response: any) => {
@@ -83,34 +80,21 @@ this.deleteservice.deleteData({event_id:data}).subscribe((Response:any)=>{
   displayStyle = "none";
   Title: any
   EventId: any
-  Boolean:boolean=false
-  linkExpiryMessage:string=""
+  Boolean: boolean = false
+  linkExpiryMessage: string = ""
   openPopup(data: any, Name: any) {
     this.displayStyle = "block";
     localStorage.setItem("Id", data)
     localStorage.setItem("ParticipantName", Name)
     this.EventId = data
-    this.link = this.baseURL+'eventrating/' + data
+    this.link = this.baseURL + 'eventrating/' + data
     this.payload();
-// this.ValidateLink(data);
+    // this.ValidateLink(data);
   }
   closePopup() {
     this.displayStyle = "none";
   }
-  // ValidateLink(Id:any){
-//     this.ValidateLinkService.validate({event_id:Id}).subscribe((response:any)=>{
-// if(response.Boolean==1){
-  // this.link = this.baseURL+'eventrating/' + Id
-//   this.Boolean=true
-// }
-// else {
-//   this.linkExpiryMessage="Link is expired"
-// }
-//     })
-   
-
-    // this.Boolean=
-  // }
+ 
 
   payload() {
     this.Title = localStorage.getItem('ParticipantName')
@@ -119,26 +103,24 @@ this.deleteservice.deleteData({event_id:data}).subscribe((Response:any)=>{
 
   // for sending data to eventlink table
   formData = {
-    Hour: "6"
+    Hour: ""
     // Event: '',
     // Link: ''
   }
   OnSubmit() {
     // console.log(this.formData, "this is formData of creatlink")
-    this.eventlinkservive.eventlink({hour: this.formData.Hour, link: this.link, event_id: this.EventId}).subscribe((data: any) => {
+    this.eventlinkservive.eventlink({ hour: this.formData.Hour, link: this.link, event_id: this.EventId }).subscribe((data: any) => {
       // console.log(data, "this is data in party Detail ts file")
       this.users = data
     })
   }
-creatlink(){
-  this.creatlinkservice.creatlink({event_id:this.EventId}).subscribe((data:any)=>{
+  creatlink() {
+    this.creatlinkservice.creatlink({ event_id: this.EventId }).subscribe((data: any) => {
 
-  })
-}
+    })
+  }
 
-Edit(id:any){
-// this.editService.editEvent({event_id:id}).subscribe((response:any)=>{
-
-// })
-}
+  Edit(id: any) {
+    
+  }
 }

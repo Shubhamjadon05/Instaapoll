@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 // import { SharedDataService } from './shared-data.service';
 import { CommunicationService } from './communication.service';
 
+
+
+
 declare var webkitSpeechRecognition: any;
 
 @Component({
