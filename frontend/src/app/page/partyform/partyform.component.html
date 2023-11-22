@@ -1,0 +1,117 @@
+<div class="my-4 row justify-content-center">
+    <div class="col-md-5 border shadow rounded border-4 border-pink col-11">
+        <div class="text-danger" *ngIf="displayheading">
+            <h3 class="text-center">Invalid Entery</h3>
+        </div>
+        <form #myForm="ngForm" (ngSubmit)="OnSubmit()" class="fs-6 p-3">
+            <span id="submit" (click)="submitForm()" class="microphone-icon">
+               
+              </span>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group p-1 mx-2">
+                    <label for="name" class="fs-6">Event Title</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="name" [(ngModel)]="formData.Name" name="name" placeholder="Enter Event Title">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" (click)="startListening('name')">
+                          <i class="fa fa-microphone"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="form-group p-1 mx-2">
+                          <label for="name" class="fs-6"> Event Place</label>
+                        <div class="input-group">
+                            <input type="place" class="form-control" id="place" name="place" [(ngModel)]="formData.Place" 
+                            placeholder="Enter Place">
+                          <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" (click)="startListening('place')">
+                              <i class="fa fa-microphone"></i>
+                            </button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                      
+              
+              
+                
+                <div class="col-md-6">
+                    <div class="form-group p-1 mx-2">
+                            <label for="name" class="fs-6">Event Date</label>
+                          <div class="input-group">
+                            <input type="date" class="form-control" id="date" [(ngModel)]="formData.Date" name="date"
+                            placeholder="Enter Event Date">
+                            <div class="input-group-append">
+                              <button type="button" class="btn btn-outline-secondary" (click)="startListening('Date')">
+                                <i class="fa fa-microphone"></i>
+                              </button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                 
+                
+                    
+
+                  <div class="col-md-6">
+                    <div class="form-group p-1 mx-2">
+                            <label for="name" class="fs-6">Event Time</label>
+                          <div class="input-group">
+                            <input type="time" class="form-control" id="time" [(ngModel)]="formData.Time" name="time"
+                        placeholder="Enter Event Time">
+                            <div class="input-group-append">
+                              <button type="button" class="btn btn-outline-secondary" (click)="startListening('Time')">
+                                <i class="fa fa-microphone"></i>
+                              </button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+
+                  <div class="col-md-6">
+                    <div class="form-group p-1 mx-2">
+                            <label for="name" class="fs-6">Hour</label>
+                          <div class="input-group">
+                            <input type="hour" class="form-control" id="hour" [(ngModel)]="formData.Hour"  name="hour"
+                            >
+                            <div class="input-group-append">
+                              <button type="button" class="btn btn-outline-secondary" (click)="startListening('hour')">
+                                <i class="fa fa-microphone"></i>
+                              </button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                 
+
+                  
+
+                
+                
+               
+            
+                <div class="form-group p-1 mx-2 col-md-11">
+                    <label for="message" class="fs-6">Event Description</label>
+                    <textarea class="form-control" id="description" type="descriptions" [(ngModel)]="formData.Description" name="descriptions"
+                        rows="3"></textarea>
+                </div>
+                <div>
+                    <button type="descriptions"  class="btn btn-outline-secondary" (click)="startListening('Description')"> <i class="fa fa-microphone"></i>
+                    </button>
+                  </div>
+            </div>
+            <div class="row justify-content-center col-md-10">
+                <button type="submit" class="btn btn-primary mx-2 my-2 col-md-3 col-3" [disabled]="myForm.invalid" id="button">Submit</button>
+                <button class="btn btn-primary mx-2 my-2 col-md-3 col-3" (click)="back()" id="back">Back</button>
+            </div>
+        </form>
+    </div>
+</div>

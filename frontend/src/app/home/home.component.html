@@ -1,0 +1,52 @@
+<div class="row justify-content-center my-4 col-11">
+  <div class="border shadow col-md-3 p-3">
+    <div class="">
+
+      <!-- <div *ngIf="displayheading" class="error-message">
+        <h3>* Invalid password and email</h3>
+      </div> -->
+      <div *ngIf="displayheading" class="error-message">
+        Invalid credentials. Please check your email and password.
+      </div>
+
+      <form #myform="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email</label>
+          <input #emailInput type="email" name="email" id="email" required minlength="5" [maxLength]="100"  email #name="ngModel" 
+            class="form-control" [(ngModel)]="formData.email"  aria-describedby="emailHelp" placeholder="Enter Email" >
+          <span class="error" *ngIf="name.invalid && name.touched">Invalid email</span>
+          
+        <div>
+          <button type="button" (click)="startListening('email')"  class="btn btn-outline-secondary">  <i class="fa fa-microphone"></i></button>
+        </div>
+
+        </div>
+        
+        
+
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input #passwordInput type="password" id="password" name="password" class="form-control" minlength="5" maxlength="100"
+            required #password="ngModel" [(ngModel)]="formData.password" placeholder="Enter Password"    [maxLength]="10" >
+          <span class="error" *ngIf="password.invalid&&password.touched">invalid password </span>
+        </div>
+        <div>
+          <button type="button" (click)="startListening('password')" class="btn btn-outline-secondary"><i class="fa fa-microphone"></i></button>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" [disabled]="myform.invalid" id="button">Submit</button>
+      </form>
+    </div>
+
+   
+
+  </div>
+</div>
+
+<section class="display" [ngStyle]="{'display':displayStyle}">
+  <div class="block2">
+    <mat-progress-spinner *ngIf="isLoading" class="loading" mode="indeterminate"></mat-progress-spinner>
+  </div>
+</section>
+<app-footer></app-footer>

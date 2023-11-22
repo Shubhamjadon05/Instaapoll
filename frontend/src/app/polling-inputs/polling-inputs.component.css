@@ -1,0 +1,26 @@
+#block2{
+    float: right;
+    margin-right: 50rem;
+  } 
+  
+  .question_block{
+    margin-left: 8rem;
+  }
+  @media (max-width: 767px){
+    #block2{
+  margin-right: 0;
+    }
+    .question_block{
+      margin-left: 1rem;
+    }
+  } 
+  h3{
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    margin-right: 3rem;
+}
+.error{
+  color: red;
+  font-weight: bold;
+}

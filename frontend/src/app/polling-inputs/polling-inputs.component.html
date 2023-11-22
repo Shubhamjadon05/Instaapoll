@@ -1,0 +1,208 @@
+<div class="container b-2" [ngStyle]="{'display':displayContainer}">
+
+
+
+    <!-- <div class="container b-2" [ngStyle]="{'display':'none'}"> -->
+    <div class="row justify-content-center" *ngIf="!isLoading; else loading;">
+        <div class="card border shadow p-3 col-md-10 col-11 my-5">
+            <div class="font-weight-bold text-center">
+                <h1>{{event.Name | titlecase}}</h1>
+            </div>
+           
+            <div *ngIf="displayheading" class="error-message">
+                Invalid credentials
+              </div>
+
+            <form  [formGroup]="myForm" (ngSubmit)="Onsubmit()" class="form">
+                <!-- <div *ngIf="myForm.invalid" class="text-danger">
+                 Please fill in all required fields.
+                 </div> -->
+
+
+
+
+                <div *ngIf="question" class="my-3 question_block">
+                    <div *ngFor="let que of question; let i = index;" class="my-4">
+                        <h4>{{i+1}}. {{que.question}}</h4>
+                        <div class="scroll-bar ">
+                            <div *ngFor="let participant of que.participants; let j = index;" class="pstar font-light">
+                                <div class="col-md-3 d-inline">
+                                    <span class="font font-weight-light fs-5">{{participant.Name}}</span>
+                                </div>
+                                <!-- <span>({{que.que_id}}-{{participant.Id}})</span> -->
+                                <!-- <input class="mx-1 form-control " type="number"  [(ngModel)]="participant.rating[i]" name="{{que.que_id}}-{{participant.Id}}" required placeholder="rate between 1 -5"> -->
+                                <!-- <ngb-rating class="star fs-3 font-weight-bold" [max]="5" [(ngModel)]="participant.rating[i]" name="{{que.que_id}}-{{participant.Id}}" required  ></ngb-rating> -->
+
+                                <div class="d-inline" id="block2">
+                                    <div class="d-inline">
+                                        <!-- <label class="form-check-label" for="flexRadioDefault1">1</label> -->
+                                        <input class="form-check-input justify-content-center" type="radio"
+                                            name="flexRadioDefault{{i}}" (change)="onCheckboxChange($event)"
+                                            id="flexRadioDefault1{{j}}{{i}}" value="{{participant.Id}}">
+                                            
+                                            
+                                    </div>
+                                    <!-- <div class="d-inline mx-2">
+                                        <label class="form-check-label" for="flexRadioDefault1">2</label>
+                                        <input class="form-check-input justify-content-center" type="radio"
+                                            name="flexRadioDefault{{j}}{{i}}" [(ngModel)]="participant.rating[i]"
+                                            id="flexRadioDefault1" value="2">
+                                    </div>
+
+                                    <div class="d-inline mx-2">
+                                        <label class="form-check-label" for="flexRadioDefault1">3</label>
+                                        <input class="form-check-input justify-content-center" type="radio"
+                                            name="flexRadioDefault{{j}}{{i}}" [(ngModel)]="participant.rating[i]"
+                                            id="flexRadioDefault1" value="3">
+                                    </div>
+
+                                    <div class="d-inline mx-2">
+                                        <label class="form-check-label" for="flexRadioDefault1">4</label>
+                                        <input class="form-check-input justify-content-center" type="radio"
+                                            name="flexRadioDefault{{j}}{{i}}" [(ngModel)]="participant.rating[i]"
+                                            id="flexRadioDefault1" value="4">
+                                    </div>
+
+                                    <div class="d-inline mx-2">
+                                        <label class="form-check-label " for="flexRadioDefault1">5</label>
+                                        <input class="form-check-input justify-content-center" type="radio"
+                                            name="flexRadioDefault{{j}}{{i}}" [(ngModel)]="participant.rating[i]"
+                                            id="flexRadioDefault1" value="5">
+                                    </div> -->
+                                </div>
+                                <!-- <input type="radio" name="{{participant.rating}}" id="4" value="4">
+                                <input type="radio" name="{{participant.rating}}" id="5" value="5"> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>  <div *ngIf="myForm.submitted && myForm.invalid" class="text-danger">
+                    Please fill in all required fields.
+                  </div>
+
+                                <!-- this is autocompleete fields start here  -->
+                                <h4 class="text-center">Personal Details :</h4>
+                                <div>
+                                    <div class="row justify-content-center pt-3">
+                                        <div class="form-group col-md-3 p-2">
+                                            <label for="field1">Name:</label>
+                                            <input class="form-control" type="text"  id="field1" formControlName="field1" placeholder="Name">
+                                           
+                                            
+                                            <mat-autocomplete #auto1="matAutocomplete">
+                                                <mat-option *ngFor="let option of field1Suggestions | async" [value]="option">
+                                                  {{ option }}
+                                                </mat-option>
+                                              </mat-autocomplete>
+                                              <span class="alert alert-danger alert-sm p-1 m-2 my-3" *ngIf="myForm.get('field1').touched && myForm.get('field1').hasError('required')">
+                                                Name is required
+                                               </span>
+                                              <div>
+                                                <button type="button" (click)="startListening('field1')"  class="btn btn-outline-secondary">  <i class="fa fa-microphone"></i></button>
+                                              </div>
+                                              
+                                        </div>
+                                        
+                                        
+                
+                                        <div class="form-group  col-md-3 p-2">
+                                            <label for="field2">House Number:</label>
+                                            
+                                            <input class="form-control" type="text"  id="field2"  formControlName="field2"  placeholder="House No">
+                                            
+                                            <!-- <mat-autocomplete #auto1="matAutocomplete">
+                                                <mat-option *ngFor="let option of field2Suggestions | async" [value]="option">
+                                                  {{ option }}
+                                                </mat-option>
+                                              </mat-autocomplete> -->
+                                              <span class="alert alert-danger alert-sm p-1 m-2 my-3" *ngIf="myForm.get('field2').touched && myForm.get('field2').hasError('required')">
+                                                Name is required
+                                               </span>
+                                            <div>
+                                                <button type="button" (click)="startListening('field2')"  class="btn btn-outline-secondary">  <i class="fa fa-microphone"></i></button>
+                                              </div>
+
+                                                                    <div class="row justify-content-center">
+                                        <h6 class="text-center text-danger" *ngIf="displayError">House Number Already Exist</h6>
+                                    </div>
+                                            </div>
+                                            
+                                        
+                                        
+                
+                                        <div class="form-group  col-md-3 p-2">
+                                            <label for="field3">Phone:</label>
+                                          
+                                            <input class="form-control" type="text"  id="field3"  formControlName="field3" placeholder="Phone Number">
+                                            
+                                            <span class="alert alert-danger alert-sm p-1 m-2 my-3" *ngIf="myForm.get('field3').touched && myForm.get('field3').hasError('required')">
+                                                Name is required
+                                               </span>
+                                            <div>
+                                                <button type="button" (click)="startListening('field3')"  class="btn btn-outline-secondary">  <i class="fa fa-microphone"></i></button>
+                                              </div>
+                                            
+                                        </div>
+                
+                                    </div>
+                
+                
+                                </div>
+                
+                                <!-- End Here  -->
+
+                <div class="row justify-content-center col-11 m-3">
+                    <button class="btn btn-primary col-md-3 col-6" id="submit_button"
+                    [disabled]="!myForm.valid" >Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template #loading>
+        <div class="row justify-content-center">
+            <mat-progress-spinner *ngIf="isLoading" class="loading" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </ng-template>
+</div>
+
+<div [ngStyle]="{'display':displayStyle}">
+    <div class="row justify-content-center">
+        <div class="boder shadow col-md-6 my-4 p-3 row justify-content-center">
+            <div class="col-md-10">
+                <h1 class="">Thank you for response</h1>
+                <h4>Your rating is submitted</h4>
+                <div class="row justify-content-center my-3">
+                    <button class="btn btn-primary col-md-5">
+                        <a href="/login" class="HomePageButton text-decoration-none text-reset">
+                            Back To Home Page
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="ExparyMessage">
+    <div class="d-flex justify-content-center col-11">
+        <div class="boder shadow col-md-6 my-4 p-3">
+            <div class="row justify-content-center">
+                <h4 class="text-center">Event is over</h4>
+                <div class="row justify-content-center my-3">
+                    <button class="btn btn-primary col-md-5 col-10 fs-6">
+                        <a href="/login" class="HomePageButton text-decoration-none text-reset">
+                            Back To Home Page
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <section class="display" [ngStyle]="{'display':displayLoading}" >
+    <div class="block2">
+      <mat-progress-spinner *ngIf="isLoading" class="loading" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </section> -->
+
+<app-footer></app-footer>

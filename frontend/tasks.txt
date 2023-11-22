@@ -1,0 +1,16 @@
+1)  Quiz
+
+     -> Add Question
+        Type (option, true/false, text)
+        add answer and options
+
+     -> Generate Link for Quiz
+
+     -> Show the quiz using survey
+
+     -> Ask participant name before Quiz
+
+     -> calculate score based on answers
+        list the participant with score
+
+     

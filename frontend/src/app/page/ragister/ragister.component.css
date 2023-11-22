@@ -1,0 +1,36 @@
+.container{
+    margin-top: 10vh;
+    padding: 2.5rem;
+    width: 40%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    overflow: hidden;
+/* height: 83vh; */
+}
+
+.form-group{
+    margin-bottom: 1rem;
+}
+
+#admin {
+    position: fixed;
+    top: 0.4rem;
+    right: 2rem;
+    width: 6rem;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(13, 13, 151);
+    margin-right: 3rem;
+}
+.errorHeading{
+    display: flex;
+justify-content: center;
+}
+
+@media (max-width: 767px){
+    .container{
+        width: 80%;
+    }
+}

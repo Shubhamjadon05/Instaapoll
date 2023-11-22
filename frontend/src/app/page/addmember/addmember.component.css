@@ -1,0 +1,87 @@
+/* .container {
+    margin-top: 10vh;
+    padding: 2.5rem;
+    width: 40rem;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-top: 7px solid #362c59;
+    border-radius: 30px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+}
+
+#name {
+    width: 99%;
+    margin-right: 11rem;
+}
+
+#button {
+    height: 2.3rem;
+}
+
+.Add {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+    color: #362965;
+    font-weight: bold;
+}
+
+.form-select {
+    margin-bottom: 1rem;
+    border: 2px solid #362c59;
+}
+
+#admin{
+    margin-bottom: 1rem;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+    margin-top: -1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width:480px) {
+    .container {
+        width: 100%;
+        border-top: none;
+        box-shadow: none;
+    }
+
+    .myformclass {
+        margin-top: -3rem;
+        width: 19rem;
+        margin-left: -1rem;
+        margin-bottom: 4rem;
+    }
+} */
+
+.material-icons{
+    font-size: 18px;
+}
+
+/* for pop */
+.display{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.display .block2{
+    /* border: 2px solid black; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 4px;
+    border: 3px solid black;
+}

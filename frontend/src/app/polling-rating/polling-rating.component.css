@@ -1,0 +1,29 @@
+/* .container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 7rem;
+    position: fixed;
+    width: 100%;
+}
+
+.contain {
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    width: 18rem;
+    border-radius: 13px;
+    margin-bottom: 2rem;
+    position: relative;
+    width: 70%;
+    border-top: 6px solid #362c59;
+}
+
+#admin{
+    float:right;
+   margin-right: 2rem;
+   margin-top: 0.5rem;
+   width: 6rem;
+} */
+
+.view-rating tbody tr:nth-of-type(1), .view-rating tbody tr:nth-of-type(2), .view-rating tbody tr:nth-of-type(3){
+    background-color: lightgreen;
+}
