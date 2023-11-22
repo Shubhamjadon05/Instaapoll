@@ -4,9 +4,12 @@ const connection = require("../config/database")
 const addQuestion = async (req, res) => {
 	const event_id = req.body.event_id;
 	const question = req.body.question;
+	const options =req.body.options
+
 
 	// console.log(req.body);
 	console.log(event_id, " ",question);
+
 	if (!event_id) {
 		res.json({ status: "error", message: "event_id is missing" });
 		return;
